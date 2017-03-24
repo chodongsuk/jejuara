@@ -1,6 +1,7 @@
 package kr.com.jejuara;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -33,11 +34,36 @@ public class WebActivity extends AppCompatActivity {
     private ProgressBar pb;
     private MyWebChromeClient mChromeClient;
 
-
+    private int mPostion = 9;
+    private String mUrl = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web);
+
+        mPostion = getIntent().getIntExtra("position",9);
+
+        if(mPostion == 1){
+            mUrl = Config.URL1;
+        }else if(mPostion == 2){
+            mUrl = Config.URL2;
+        }else if(mPostion == 3){
+            mUrl = Config.URL3;
+        }else if(mPostion == 4){
+            mUrl = Config.URL4;
+        }else if(mPostion == 5){
+            mUrl = Config.URL5;
+        }else if(mPostion == 6){
+            mUrl = Config.URL6;
+        }else if(mPostion == 7){
+            mUrl = Config.URL7;
+        }else if(mPostion == 8){
+            mUrl = Config.URL8;
+        }else if(mPostion == 9){
+            mUrl = Config.URL9;
+        }else{
+            mUrl = Config.URL9;
+        }
 
 
         initViews();
@@ -72,7 +98,7 @@ public class WebActivity extends AppCompatActivity {
         mWebView.setWebViewClient(new OfflineWebViewClient(this));
 
         if (savedInstanceState == null) {
-                loadURL("http://jejuara.net");
+                loadURL(mUrl);
         }
     }
     @Override
@@ -112,31 +138,12 @@ public class WebActivity extends AppCompatActivity {
         if ((keyCode == KeyEvent.KEYCODE_BACK) && this.mWebView.canGoBack()) {
             this.mWebView.goBack();
             return true;
+        }else{
+            finish();
         }
 
         return super.onKeyDown(keyCode, event);
     }
 
-    @Override
-    public void onBackPressed() {
-
-        if (mWebView.canGoBack()) {
-            mWebView.goBack();
-        }else {
-            new AlertDialog.Builder(this)
-                    .setIcon(android.R.drawable.ic_dialog_alert)
-                    .setTitle(getResources().getString(R.string.app_name))
-                    .setMessage("어플을 종료 하시겠습니까?")
-                    .setPositiveButton("예", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            finish();
-                        }
-
-                    })
-                    .setNegativeButton("아니오", null)
-                    .show();
-        }
-    }
 
 }
