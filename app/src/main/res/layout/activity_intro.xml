@@ -133,7 +133,9 @@
                 android:src="@mipmap/bt9"/>
         </LinearLayout>
     </LinearLayout>
+
     <ImageView
+        android:layout_marginTop="50dip"
         android:layout_gravity="center"
         android:id="@+id/imageView10"
         android:layout_width="wrap_content"
